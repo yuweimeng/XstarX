@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WorkMedia from '../components/WorkMedia.astro';
+import WorkRow from '../components/WorkRow.astro';
+import { site } from '../data/site';
+
+const works = (await getCollection('works')).sort((a,b) => a.data.order - b.data.order);
+const featured = works.filter(w => w.data.featured).slice(0, 3);
+---
+<BaseLayout>
+  <SiteHeader />
+  <main id="main">
+    <section class="cover" data-registration-stage>
+      <div class="cover__rail" aria-hidden="true"><span>VOL. 00</span><span>SEPT / 2026</span><span>PRIVATE PUBLICATION</span></div>
+      <div class="cover__paper" data-paper>
+        <div class="crop crop--tl"></div><div class="crop crop--tr"></div><div class="crop crop--bl"></div><div class="crop crop--br"></div>
+        <p class="cover__kicker">A LIVING PERSONAL PUBLICATION</p>
+        <div class="cover__title" aria-label="UNTITLED 無題">
+          <span class="plate plate--key" data-plate-key>UNTITLED</span>
+          <span class="plate plate--ghost" aria-hidden="true" data-plate-ghost>UNTITLED</span>
+        </div>
+        <div class="cover__cn">無題</div>
+        <div class="cover__deck">
+          <p>{site.description}</p>
+          <p class="cover__instruction">SCROLL TO REGISTER / 向下翻閱</p>
+        </div>
+        <div class="folio">ISSUE {site.issue}<br/>PRINT / SCREEN</div>
+      </div>
+      <div class="register-meter" aria-hidden="true"><span>OUT OF REGISTER</span><i data-register-line></i><span>IN REGISTER</span></div>
+    </section>
+
+    <section class="contents" id="contents">
+      <div class="section-head">
+        <p class="eyebrow">CONTENTS / 目錄</p>
+        <p class="section-index">01—04</p>
+      </div>
+      <div class="contents__grid">
+        <h2>文字、圖像、<br/>以及沿途留下的光。</h2>
+        <div class="contents__copy measure-narrow">
+          <p>這裡不先解釋作者。作品先出現，身份在閱讀之後才逐漸形成。</p>
+          <p>每一期是一種觀看方式；Archive 則保留它們留下的次序與痕跡。</p>
+        </div>
+      </div>
+      <nav class="contents__index" aria-label="Content categories">
+        <a href="/writing/"><span>01</span><strong>WRITING</strong><em>文字</em></a>
+        <a href="/visual/"><span>02</span><strong>VISUAL</strong><em>視覺</em></a>
+        <a href="/field-notes/"><span>03</span><strong>FIELD NOTES</strong><em>沿途記錄</em></a>
+        <a href="/archive/"><span>04</span><strong>ARCHIVE</strong><em>檔案</em></a>
+      </nav>
+    </section>
+
+    <section class="feature-ledger">
+      <div class="section-head section-head--dark">
+        <p class="eyebrow">CURRENT ISSUE / SELECTED WORKS</p>
+        <p class="section-index">02</p>
+      </div>
+      {featured.map((work, i) => (
+        <article class={`feature feature--${i + 1}`}>
+          <div class="feature__meta">
+            <p>{String(i + 1).padStart(2,'0')} / {work.data.category.toUpperCase()}</p>
+            <h2><a href={`/work/${work.id}/`}>{work.data.title}</a></h2>
+            <p>{work.data.description}</p>
+            <a class="text-link" href={`/work/${work.id}/`}>OPEN WORK <span aria-hidden="true">↗</span></a>
+          </div>
+          <WorkMedia work={work} mode={i === 2 ? 'screen' : 'paper'} />
+        </article>
+      ))}
+    </section>
+
+    <section class="screen-interlude" data-screen-interlude>
+      <div class="screen-interlude__sticky">
+        <p class="eyebrow">SCREEN MODE / 03</p>
+        <p class="screen-interlude__line">有些作品需要被閱讀。</p>
+        <p class="screen-interlude__line screen-interlude__line--offset">有些，只需要被看見。</p>
+        <div class="screen-window" aria-hidden="true">
+          <span>FIELD / IMAGE</span>
+          <i></i><i></i><i></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="archive-preview">
+      <div class="section-head">
+        <p class="eyebrow">ARCHIVE / 索引</p>
+        <p class="section-index">04</p>
+      </div>
+      <div class="archive-preview__intro">
+        <h2>Not everything has to become a feature.</h2>
+        <p>完整作品、碎片、照片與尚未完成的 Notes 都留在同一套索引裡。日期是順序，不是排名。</p>
+      </div>
+      <div class="work-list">
+        {works.map((work, i) => <WorkRow work={work} index={i + 1} />)}
+      </div>
+      <a class="archive-door" href="/archive/">
+        <span>ENTER FULL ARCHIVE</span><strong>全部檔案</strong><i aria-hidden="true">→</i>
+      </a>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

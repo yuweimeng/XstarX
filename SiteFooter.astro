@@ -1,0 +1,14 @@
+---
+import { site } from '../data/site';
+---
+<footer class="site-footer">
+  <div>
+    <p class="eyebrow">COLOPHON</p>
+    <p>{site.description}</p>
+  </div>
+  <div class="footer-meta">
+    <span>ISSUE {site.issue}</span>
+    <span>© {new Date().getFullYear()}</span>
+    <a href="/about/">About / Contact</a>
+  </div>
+</footer>

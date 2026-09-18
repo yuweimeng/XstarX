@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+<BaseLayout title="Colophon / About">
+  <SiteHeader />
+  <main id="main" class="about-page">
+    <header class="index-hero"><p class="eyebrow">COLOPHON</p><h1>About<span>關於</span></h1></header>
+    <section class="about-grid">
+      <p class="about-lead">這不是一張放大的履歷，而是一份持續更新的個人出版物。</p>
+      <div class="about-copy"><p>作者資料、簡介、聯絡方式與履歷可以放在這裡，但它們不必搶在作品之前出現。</p><p class="placeholder-copy">[待置換：作者簡介 / Email / Social links]</p></div>
+      <dl class="colophon-list"><div><dt>FORM</dt><dd>Digital Journal / Archive</dd></div><div><dt>LANGUAGE</dt><dd>中文主體 × English metadata</dd></div><div><dt>MEDIA</dt><dd>Writing · Visual · Photography · Notes</dd></div><div><dt>STATUS</dt><dd>Living / Ongoing</dd></div></dl>
+    </section>
+  </main>
+  <SiteFooter />
+</BaseLayout>

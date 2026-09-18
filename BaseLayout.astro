@@ -1,0 +1,32 @@
+---
+import '../styles/global.css';
+import { site } from '../data/site';
+const {
+  title = site.title,
+  description = site.description,
+  ogImage = '/assets/og-default.png',
+  bodyClass = ''
+} = Astro.props;
+const pageTitle = title === site.title ? title : `${title} — ${site.title}`;
+---
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#f1ece2" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class={bodyClass}>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <slot />
+    <script src="/scripts/site-motion.js" is:inline></script>
+  </body>
+</html>

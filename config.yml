@@ -1,0 +1,36 @@
+# CMS schema is ready. Replace backend settings after choosing the Git host/auth method.
+backend:
+  name: github
+  repo: REPLACE_ME/REPLACE_ME
+  branch: main
+
+local_backend: true
+media_folder: public/uploads
+public_folder: /uploads
+publish_mode: simple
+
+collections:
+  - name: works
+    label: Works
+    label_singular: Work
+    folder: src/data/works
+    create: true
+    extension: md
+    format: frontmatter
+    slug: "{{year}}-{{slug}}"
+    sortable_fields: [year, title, category, order]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: English / Metadata Title, name: titleEn, widget: string, required: false }
+      - { label: Category, name: category, widget: select, options: [writing, visual, field-note, note] }
+      - { label: Year, name: year, widget: number, value_type: int }
+      - { label: Issue, name: issue, widget: string, default: "00" }
+      - { label: Order, name: order, widget: number, value_type: int, default: 999 }
+      - { label: Featured, name: featured, widget: boolean, default: false }
+      - { label: Description, name: description, widget: text }
+      - { label: Location, name: location, widget: string, required: false }
+      - { label: Medium, name: medium, widget: string, required: false }
+      - { label: Image, name: image, widget: image, required: false }
+      - { label: Placeholder, name: placeholder, widget: boolean, default: false }
+      - { label: Accent, name: accent, widget: select, options: [vermilion, ink, olive], default: ink }
+      - { label: Body, name: body, widget: markdown }

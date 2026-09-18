@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WorkRow from '../components/WorkRow.astro';
+const works = (await getCollection('works')).filter(w => w.data.category === 'field-note').sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Field Notes / 沿途記錄" bodyClass="screen-page"><SiteHeader /><main id="main" class="index-page"><header class="index-hero"><p class="eyebrow">SECTION 03</p><h1>Field Notes<span>沿途記錄</span></h1><p>攝影、旅行與在場的痕跡。</p></header><div class="work-list work-list--archive">{works.map((work,i)=><WorkRow work={work} index={i+1}/>)}</div></main><SiteFooter /></BaseLayout>

@@ -1,0 +1,17 @@
+PASS  Required routes and production files exist — 12 files
+PASS  Astro stack pinned — ^7.3.0
+PASS  Semantic content collection configured
+PASS  Still-frame section-shape diversity — cover / editorial grid / alternating spreads / screen scene / index
+PASS  Large editorial type-scale jump
+PASS  Palette stays small and role-based
+PASS  Keyboard focus is visible
+PASS  Reduced-motion fallback exists
+PASS  Scroll listener is passive
+PASS  One shared rAF motion loop
+PASS  Verification probe surface exists
+PASS  Archive filter has URL state + empty state
+PASS  Mobile layout is distinct
+PASS  No fabricated proof blocks — placeholder works only
+PASS  CMS schema present but backend visibly unconfigured
+
+15/15 static checks passed.

@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SiteHeader from '../../components/SiteHeader.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import WorkMedia from '../../components/WorkMedia.astro';
+
+export async function getStaticPaths() {
+  const works = await getCollection('works');
+  return works.map((work) => ({ params: { slug: work.id }, props: { work } }));
+}
+const { work } = Astro.props;
+const { Content } = await render(work);
+---
+<BaseLayout title={work.data.title} description={work.data.description}>
+  <SiteHeader />
+  <main id="main" class="work-page">
+    <header class="work-hero">
+      <div class="work-hero__meta"><p class="eyebrow">ISSUE {work.data.issue} / {work.data.category.toUpperCase()}</p><p>{work.data.year}</p></div>
+      <h1>{work.data.title}<span>{work.data.titleEn}</span></h1>
+      <p class="work-hero__deck">{work.data.description}</p>
+    </header>
+    <WorkMedia work={work} mode={work.data.category === 'field-note' ? 'screen' : 'paper'} />
+    <article class="work-body prose"><Content /></article>
+    <nav class="work-end"><a href="/archive/">← BACK TO ARCHIVE</a><a href="/">COVER →</a></nav>
+  </main>
+  <SiteFooter />
+</BaseLayout>

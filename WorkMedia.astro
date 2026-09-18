@@ -1,0 +1,16 @@
+---
+const { work, mode = 'paper' } = Astro.props;
+const cls = `work-media work-media--${work.data.category} work-media--${mode} accent-${work.data.accent}`;
+---
+<div class={cls} aria-label={work.data.placeholder ? '作品圖片待置換' : work.data.title}>
+  {work.data.image ? (
+    <img src={work.data.image} alt="" loading="lazy" decoding="async" />
+  ) : (
+    <div class="proof-placeholder" aria-hidden="true">
+      <span class="registration registration--tl">⊕</span>
+      <span class="registration registration--br">⊕</span>
+      <span class="proof-code">{work.data.titleEn ?? work.data.category.toUpperCase()}</span>
+      <span class="proof-note">IMAGE / WORK TO BE INSERTED</span>
+    </div>
+  )}
+</div>

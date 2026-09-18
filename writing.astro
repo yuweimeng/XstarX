@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WorkRow from '../components/WorkRow.astro';
+const works = (await getCollection('works')).filter(w => w.data.category === 'writing').sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Writing / 文字"><SiteHeader /><main id="main" class="index-page"><header class="index-hero"><p class="eyebrow">SECTION 01</p><h1>Writing<span>文字</span></h1><p>散文、詩與其他以閱讀為主要媒介的作品。</p></header><div class="work-list work-list--archive">{works.map((work,i)=><WorkRow work={work} index={i+1}/>)}</div></main><SiteFooter /></BaseLayout>

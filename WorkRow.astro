@@ -1,0 +1,16 @@
+---
+const { work, index = 1 } = Astro.props;
+const typeLabel = {
+  writing: 'WRITING',
+  visual: 'VISUAL',
+  'field-note': 'FIELD NOTE',
+  note: 'NOTE'
+}[work.data.category];
+---
+<a class="work-row" href={`/work/${work.id}/`} data-work-row>
+  <span class="work-row__num">{String(index).padStart(2, '0')}</span>
+  <span class="work-row__title"><em>{work.data.title}</em><small>{work.data.titleEn}</small></span>
+  <span class="work-row__type">{typeLabel}</span>
+  <span class="work-row__year">{work.data.year}</span>
+  <span class="work-row__arrow" aria-hidden="true">↗</span>
+</a>

@@ -1,0 +1,9 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WorkRow from '../components/WorkRow.astro';
+const works = (await getCollection('works')).filter(w => w.data.category === 'visual').sort((a,b) => a.data.order - b.data.order);
+---
+<BaseLayout title="Visual / 視覺"><SiteHeader /><main id="main" class="index-page"><header class="index-hero"><p class="eyebrow">SECTION 02</p><h1>Visual<span>視覺</span></h1><p>平面、概念、排版與其他視覺實驗。</p></header><div class="work-list work-list--archive">{works.map((work,i)=><WorkRow work={work} index={i+1}/>)}</div></main><SiteFooter /></BaseLayout>

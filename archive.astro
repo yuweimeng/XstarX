@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import WorkRow from '../components/WorkRow.astro';
+const works = (await getCollection('works')).sort((a,b) => b.data.year - a.data.year || a.data.order - b.data.order);
+---
+<BaseLayout title="Archive / 檔案">
+  <SiteHeader />
+  <main id="main" class="index-page">
+    <header class="index-hero"><p class="eyebrow">MASTER INDEX</p><h1>Archive<span>檔案</span></h1><p>所有作品依年份與類型保留。這裡是索引，不是排行榜。</p></header>
+    <div class="archive-tools" data-archive-tools>
+      <button class="filter is-active" data-filter="all">ALL</button>
+      <button class="filter" data-filter="writing">WRITING</button>
+      <button class="filter" data-filter="visual">VISUAL</button>
+      <button class="filter" data-filter="field-note">FIELD NOTES</button>
+      <button class="filter" data-filter="note">NOTES</button>
+    </div>
+    <div class="work-list work-list--archive" data-archive-list>
+      {works.map((work, i) => <div data-category={work.data.category}><WorkRow work={work} index={i + 1} /></div>)}
+    </div>
+    <p class="archive-empty" hidden data-archive-empty>No entries in this category yet / 此分類暫無內容。</p>
+  </main>
+  <SiteFooter />
+</BaseLayout>

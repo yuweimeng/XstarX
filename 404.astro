@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+---
+<BaseLayout title="404 / Missing Page">
+  <SiteHeader />
+  <main id="main" class="index-page">
+    <header class="index-hero">
+      <p class="eyebrow">ERROR / 404</p>
+      <h1>Missing<span>頁面未被收錄</span></h1>
+      <p>這一頁不在目前的 Issue 裡。你可以回到封面，或直接進入 Archive。</p>
+    </header>
+    <div class="work-list work-list--archive">
+      <a class="work-row" href="/"><span class="work-row__num">01</span><span class="work-row__title"><em>Return to Cover</em><small>回到封面</small></span><span class="work-row__type">HOME</span><span class="work-row__year">↗</span><span class="work-row__arrow">↗</span></a>
+      <a class="work-row" href="/archive/"><span class="work-row__num">02</span><span class="work-row__title"><em>Open Archive</em><small>全部檔案</small></span><span class="work-row__type">INDEX</span><span class="work-row__year">↗</span><span class="work-row__arrow">↗</span></a>
+    </div>
+  </main>
+  <SiteFooter />
+</BaseLayout>

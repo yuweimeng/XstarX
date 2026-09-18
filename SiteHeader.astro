@@ -1,0 +1,22 @@
+---
+import { site } from '../data/site';
+---
+<header class="site-header" data-header>
+  <a class="site-mark" href="/" aria-label="Home">
+    <span aria-hidden="true">{site.shortTitle}</span>
+  </a>
+  <nav aria-label="Primary" class="desktop-nav">
+    {site.nav.map(([label, href]) => <a href={href}>{label}</a>)}
+  </nav>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+    <span>Index</span><span aria-hidden="true">↗</span>
+  </button>
+</header>
+<div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu>
+  <div class="mobile-menu__inner">
+    <p class="eyebrow">CURRENT ISSUE · {site.issue}</p>
+    <nav aria-label="Mobile primary">
+      {site.nav.map(([label, href], i) => <a href={href}><span>{String(i + 1).padStart(2, '0')}</span>{label}</a>)}
+    </nav>
+  </div>
+</div>
