@@ -1,0 +1,17 @@
+{
+  "name": "untitled-journal",
+  "private": true,
+  "version": "0.1.1",
+  "type": "module",
+  "scripts": {
+    "prebuild": "node restore-layout.mjs",
+    "dev": "node restore-layout.mjs && astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^7.3.0"
+  },
+  "devDependencies": {}
+}
